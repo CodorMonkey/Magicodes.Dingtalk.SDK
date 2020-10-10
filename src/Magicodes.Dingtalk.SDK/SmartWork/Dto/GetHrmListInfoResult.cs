@@ -1,14 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Magicodes.Dingtalk.SDK.SmartWork.Dto
 {
     /// <summary>
     /// 获取员工花名册字段信息返回结果
     /// </summary>
-
     public class GetHrmListInfoResult : ApiResultBase
     {
         /// <summary>

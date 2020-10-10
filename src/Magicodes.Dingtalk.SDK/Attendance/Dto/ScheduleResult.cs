@@ -22,8 +22,10 @@ namespace Magicodes.Dingtalk.SDK.Attendance.Dto
 {
     public class ScheduleResult
     {
-        [JsonProperty("schedules")] public List<Schedule> Schedules { get; set; } = new List<Schedule>();
+        [JsonProperty("schedules")]
+        public List<Schedule> Schedules { get; set; } = new List<Schedule>();
 
-        [JsonProperty("has_more")] public bool HasMore { get; set; }
+        [JsonProperty("has_more")]
+        public bool HasMore { get; set; }
     }
 }

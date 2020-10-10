@@ -28,13 +28,15 @@ namespace Magicodes.Dingtalk.SDK.Attendance.Dto.Enum
         /// <summary>
         ///     上班
         /// </summary>
-        [Display(Name = "上班")] [EnumMember(Value = "OnDuty")]
+        [Display(Name     = "上班")]
+        [EnumMember(Value = "OnDuty")]
         OnDuty = 0,
 
         /// <summary>
         ///     下班
         /// </summary>
-        [Display(Name = "下班")] [EnumMember(Value = "OffDuty")]
+        [Display(Name     = "下班")]
+        [EnumMember(Value = "OffDuty")]
         OffDuty = 1
     }
 }

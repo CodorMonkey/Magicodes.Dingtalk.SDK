@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Magicodes.Dingtalk.SDK.Extcontact.Dto
 {

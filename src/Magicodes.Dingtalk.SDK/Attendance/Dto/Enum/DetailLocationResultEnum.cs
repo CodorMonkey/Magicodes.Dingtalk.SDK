@@ -28,19 +28,22 @@ namespace Magicodes.Dingtalk.SDK.Attendance.Dto.Enum
         /// <summary>
         ///     范围内
         /// </summary>
-        [Display(Name = "范围内")] [EnumMember(Value = "Normal")]
+        [Display(Name     = "范围内")]
+        [EnumMember(Value = "Normal")]
         Normal = 0,
 
         /// <summary>
         ///     范围外
         /// </summary>
-        [Display(Name = "范围外")] [EnumMember(Value = "Outside")]
+        [Display(Name     = "范围外")]
+        [EnumMember(Value = "Outside")]
         Outside = 1,
 
         /// <summary>
         ///     未打卡
         /// </summary>
-        [Display(Name = "未打卡")] [EnumMember(Value = "NotSigned")]
+        [Display(Name     = "未打卡")]
+        [EnumMember(Value = "NotSigned")]
         NotSigned = 2
     }
 }

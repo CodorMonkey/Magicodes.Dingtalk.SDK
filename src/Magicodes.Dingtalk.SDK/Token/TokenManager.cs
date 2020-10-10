@@ -24,27 +24,27 @@ namespace Magicodes.Dingtalk.SDK.Token
 {
     public class TokenManager
     {
-        private const string Key = "DingtalkAccessToken";
-        private readonly IDistributedCache _cache;
+        private const    string                Key = "DingtalkAccessToken";
+        private readonly IDistributedCache     _cache;
         private readonly ILogger<TokenManager> _logger;
-        private readonly TokenApi _tokenApi;
+        private readonly TokenApi              _tokenApi;
 
-        public TokenManager(IDistributedCache cache, TokenApi tokenApi, ILogger<TokenManager> logger)
-        {
-            _cache = cache;
+        public TokenManager(IDistributedCache     cache, TokenApi tokenApi,
+                            ILogger<TokenManager> logger) {
+            _cache    = cache;
             _tokenApi = tokenApi;
-            _logger = logger;
+            _logger   = logger;
         }
 
-        public async Task<string> GetToken()
-        {
+        public async Task<string> GetToken() {
             var value = await _cache.GetStringAsync(Key);
             if (!string.IsNullOrEmpty(value)) return value;
             var result = await _tokenApi.GetToken();
             value = result.AccessToken;
             _logger.LogDebug("Token获取成功...");
             await _cache.SetStringAsync(Key, value,
-                new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(7000)));
+                                        new DistributedCacheEntryOptions().SetSlidingExpiration(
+                                            TimeSpan.FromSeconds(7000)));
             _logger.LogDebug("Token已写入缓存...");
             return value;
         }

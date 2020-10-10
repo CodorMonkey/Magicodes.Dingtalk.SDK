@@ -29,21 +29,20 @@ namespace Magicodes.Dingtalk.SDK.Attendance
     /// </summary>
     public class AttendanceApi : ApiBase
     {
-        public AttendanceApi(ILogger<AttendanceApi> logger, IServiceProvider serviceProvider) : base(logger,
-            serviceProvider)
-        {
+        public AttendanceApi(ILogger<AttendanceApi> logger, IServiceProvider serviceProvider) :
+            base(logger,
+                 serviceProvider) {
         }
 
-        public async Task<ListScheduleResult> ListSchedule(DateTime? workDate = null, int offset = 0, int size = 200)
-        {
+        public async Task<ListScheduleResult> ListSchedule(DateTime? workDate = null,
+                                                           int       offset   = 0, int size = 200) {
             if (!workDate.HasValue) workDate = TimeZoneHelper.GetChinaDateTime();
             return await Post<ListScheduleResult>(
-                "topapi/attendance/listschedule?access_token={ACCESS_TOKEN}", new
-                {
-                    workDate = workDate.Value.ToString("yyyy-MM-dd"),
-                    offset,
-                    size
-                });
+                       "topapi/attendance/listschedule?access_token={ACCESS_TOKEN}", new {
+                           workDate = workDate.Value.ToString("yyyy-MM-dd"),
+                           offset,
+                           size
+                       });
         }
 
         /// <summary>
@@ -55,16 +54,14 @@ namespace Magicodes.Dingtalk.SDK.Attendance
         /// <param name="isI18n">是否为海外企业使用</param>
         /// <returns></returns>
         public async Task<ListRecordResult> ListRecord(List<string> userIds, DateTime checkDateFrom,
-            DateTime checkDateTo, bool isI18n = false)
-        {
+                                                       DateTime checkDateTo, bool isI18n = false) {
             return await Post<ListRecordResult>(
-                "attendance/listRecord?access_token={ACCESS_TOKEN}", new
-                {
-                    userIds,
-                    checkDateFrom = checkDateFrom.ToString("yyyy-MM-dd HH:mm:ss"),
-                    checkDateTo = checkDateTo.ToString("yyyy-MM-dd HH:mm:ss"),
-                    isI18n
-                });
+                       "attendance/listRecord?access_token={ACCESS_TOKEN}", new {
+                           userIds,
+                           checkDateFrom = checkDateFrom.ToString("yyyy-MM-dd HH:mm:ss"),
+                           checkDateTo   = checkDateTo.ToString("yyyy-MM-dd HH:mm:ss"),
+                           isI18n
+                       });
         }
 
 
@@ -79,19 +76,19 @@ namespace Magicodes.Dingtalk.SDK.Attendance
         /// <param name="limit"></param>
         /// <param name="isI18n"></param>
         /// <returns></returns>
-        public async Task<AttendanceListResult> List(List<string> userIds, DateTime workDateFrom, DateTime workDateTo,
-            int offset = 0, int limit = 50, bool isI18n = false)
-        {
+        public async Task<AttendanceListResult> List(List<string> userIds, DateTime workDateFrom,
+                                                     DateTime     workDateTo,
+                                                     int          offset = 0, int limit = 50,
+                                                     bool         isI18n = false) {
             return await Post<AttendanceListResult>(
-                "attendance/list?access_token={ACCESS_TOKEN}", new
-                {
-                    userIdList = userIds,
-                    workDateFrom = workDateFrom.ToString("yyyy-MM-dd HH:mm:ss"),
-                    workDateTo = workDateTo.ToString("yyyy-MM-dd HH:mm:ss"),
-                    offset,
-                    limit,
-                    isI18n
-                });
+                       "attendance/list?access_token={ACCESS_TOKEN}", new {
+                           userIdList   = userIds,
+                           workDateFrom = workDateFrom.ToString("yyyy-MM-dd HH:mm:ss"),
+                           workDateTo   = workDateTo.ToString("yyyy-MM-dd HH:mm:ss"),
+                           offset,
+                           limit,
+                           isI18n
+                       });
         }
     }
 }

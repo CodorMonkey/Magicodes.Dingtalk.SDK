@@ -1,7 +1,7 @@
-﻿using Magicodes.Dingtalk.SDK.Auth.Dto;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Magicodes.Dingtalk.SDK.Auth.Dto;
+using Microsoft.Extensions.Logging;
 
 namespace Magicodes.Dingtalk.SDK.Auth
 {
@@ -15,16 +15,15 @@ namespace Magicodes.Dingtalk.SDK.Auth
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="serviceProvider"></param>
-        public AuthApi(ILogger<AuthApi> logger, IServiceProvider serviceProvider) : base(logger, serviceProvider)
-        {
+        public AuthApi(ILogger<AuthApi> logger, IServiceProvider serviceProvider) : base(
+            logger, serviceProvider) {
         }
 
         /// <summary>
         /// 获取通讯录权限范围
         /// </summary>
         /// <returns></returns>
-        public async Task<GetAuthScopesResult> GetAuthScopes()
-        {
+        public async Task<GetAuthScopesResult> GetAuthScopes() {
             return await Get<GetAuthScopesResult>("auth/scopes?access_token={ACCESS_TOKEN}");
         }
     }

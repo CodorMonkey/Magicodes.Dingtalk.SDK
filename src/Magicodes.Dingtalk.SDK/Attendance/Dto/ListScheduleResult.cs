@@ -21,6 +21,7 @@ namespace Magicodes.Dingtalk.SDK.Attendance.Dto
 {
     public class ListScheduleResult : ApiResultBase
     {
-        [JsonProperty("result")] public ScheduleResult Result { get; set; }
+        [JsonProperty("result")]
+        public ScheduleResult Result { get; set; }
     }
 }

@@ -26,8 +26,8 @@ namespace Magicodes.Dingtalk.SDK.Notice
 {
     public class NoticeApi : ApiBase
     {
-        public NoticeApi(ILogger<NoticeApi> logger, IServiceProvider serviceProvider) : base(logger, serviceProvider)
-        {
+        public NoticeApi(ILogger<NoticeApi> logger, IServiceProvider serviceProvider) : base(
+            logger, serviceProvider) {
         }
 
         /// <summary>
@@ -37,15 +37,15 @@ namespace Magicodes.Dingtalk.SDK.Notice
         ///     该接口是异步发送消息，接口返回成功并不表示用户一定会收到消息，需要通过“查询工作通知消息的发送结果”接口查询是否给用户发送成功。
         /// </summary>
         /// <returns></returns>
-        public async Task<NoticeJobResult> JobNotice(int agentId, string useridList, MsgHelper msg)
-        {
+        public async Task<NoticeJobResult>
+            JobNotice(int agentId, string useridList, MsgHelper msg) {
             return await Post<NoticeJobResult>(
-                "topapi/message/corpconversation/asyncsend_v2?access_token={ACCESS_TOKEN}", new
-                {
-                    agentId,
-                    useridList,
-                    msg = JsonConvert.SerializeObject(msg)
-                });
+                       "topapi/message/corpconversation/asyncsend_v2?access_token={ACCESS_TOKEN}",
+                       new {
+                           agentId,
+                           useridList,
+                           msg = JsonConvert.SerializeObject(msg)
+                       });
         }
     }
 }

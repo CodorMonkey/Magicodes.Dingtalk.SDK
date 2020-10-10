@@ -32,11 +32,10 @@ namespace Magicodes.Dingtalk.SDK.Helper
         /// </summary>
         /// <param name="en">需要获取枚举描述的枚举</param>
         /// <returns>描述内容</returns>
-        public static string GetDescription(this Enum en)
-        {
+        public static string GetDescription(this Enum en) {
             var _description = string.Empty;
-            var _fieldInfo = en.GetType().GetField(en.ToString());
-            var _attributes = _fieldInfo.GetDescriptAttr();
+            var _fieldInfo   = en.GetType().GetField(en.ToString());
+            var _attributes  = _fieldInfo.GetDescriptAttr();
             if (_attributes != null && _attributes.Length > 0)
                 _description = _attributes[0].Description;
             else
@@ -50,10 +49,10 @@ namespace Magicodes.Dingtalk.SDK.Helper
         /// </summary>
         /// <param name="fieldInfo">FieldInfo</param>
         /// <returns>DescriptionAttribute[] </returns>
-        public static DescriptionAttribute[] GetDescriptAttr(this FieldInfo fieldInfo)
-        {
+        public static DescriptionAttribute[] GetDescriptAttr(this FieldInfo fieldInfo) {
             if (fieldInfo != null)
-                return (DescriptionAttribute[]) fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                return (DescriptionAttribute[]) fieldInfo.GetCustomAttributes(
+                    typeof(DescriptionAttribute), false);
             return null;
         }
 
@@ -62,12 +61,12 @@ namespace Magicodes.Dingtalk.SDK.Helper
         /// </summary>
         /// <param name="en">枚举</param>
         /// <returns>返回枚举的描述</returns>
-        public static string GetDisplay(this Enum en)
-        {
-            var type = en.GetType(); //获取类型  
+        public static string GetDisplay(this Enum en) {
+            var type        = en.GetType();                  //获取类型  
             var memberInfos = type.GetMember(en.ToString()); //获取成员  
             if (memberInfos != null && memberInfos.Length > 0)
-                if (memberInfos[0].GetCustomAttributes(typeof(DisplayAttribute), false) is DisplayAttribute[] attrs &&
+                if (memberInfos[0].GetCustomAttributes(typeof(DisplayAttribute), false) is
+                        DisplayAttribute[] attrs &&
                     attrs.Length > 0)
                     return attrs[0].Name ?? attrs[0].Description; //返回当前名称  
             return en.ToString();

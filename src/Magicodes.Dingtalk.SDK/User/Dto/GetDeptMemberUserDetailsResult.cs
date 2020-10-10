@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using SimpleJson;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using SimpleJson;
 
 namespace Magicodes.Dingtalk.SDK.User.Dto
 {

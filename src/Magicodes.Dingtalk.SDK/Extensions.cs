@@ -15,7 +15,6 @@
 //   
 // ======================================================================
 
-using RestSharp;
 using System;
 
 namespace Magicodes.Dingtalk.SDK
@@ -31,19 +30,19 @@ namespace Magicodes.Dingtalk.SDK
         /// <param name="comp"></param>
         /// <returns></returns>
         public static string Replace(this string source, string oldString, string newString,
-            StringComparison comp = StringComparison.CurrentCultureIgnoreCase)
-        {
+                                     StringComparison comp =
+                                         StringComparison.CurrentCultureIgnoreCase) {
             var index = source.IndexOf(oldString, comp);
 
             var matchFound = index >= 0;
 
-            if (matchFound)
-            {
+            if (matchFound) {
                 source = source.Remove(index, oldString.Length);
                 source = source.Insert(index, newString);
             }
 
-            if (source.IndexOf(oldString, comp) != -1) source = Replace(source, oldString, newString, comp);
+            if (source.IndexOf(oldString, comp) != -1)
+                source = Replace(source, oldString, newString, comp);
             return source;
         }
 
@@ -52,10 +51,8 @@ namespace Magicodes.Dingtalk.SDK
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="data"></param>
-        public static void ThrowExceptionIfNotSuccess<T>(T data) where T : ApiResultBase, new()
-        {
-            if (data != null && !data.IsSuccess())
-            {
+        public static void ThrowExceptionIfNotSuccess<T>(T data) where T : ApiResultBase, new() {
+            if (data != null && !data.IsSuccess()) {
                 throw new DingtalkApiException(data.ErrorCode, data.ErrorMessage);
             }
         }

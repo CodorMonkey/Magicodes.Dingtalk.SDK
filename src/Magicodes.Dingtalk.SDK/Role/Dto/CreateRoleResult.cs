@@ -5,7 +5,7 @@ namespace Magicodes.Dingtalk.SDK.Role.Dto
     /// <summary>
     /// 创建角色返回结果
     /// </summary>
-    public class CreateRoleResult:ApiResultBase
+    public class CreateRoleResult : ApiResultBase
     {
         /// <summary>
         /// 角色id

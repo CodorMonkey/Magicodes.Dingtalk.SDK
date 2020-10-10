@@ -28,49 +28,57 @@ namespace Magicodes.Dingtalk.SDK.Attendance.Dto.Enum
         /// <summary>
         ///     考勤机
         /// </summary>
-        [Display(Name = "考勤机")] [EnumMember(Value = "ATM")]
+        [Display(Name     = "考勤机")]
+        [EnumMember(Value = "ATM")]
         ATM = 0,
 
         /// <summary>
         ///     IBeacon
         /// </summary>
-        [Display(Name = "IBeacon")] [EnumMember(Value = "BEACON")]
+        [Display(Name     = "IBeacon")]
+        [EnumMember(Value = "BEACON")]
         Beacon = 1,
 
         /// <summary>
         ///     钉钉考勤机
         /// </summary>
-        [Display(Name = "钉钉考勤机")] [EnumMember(Value = "DING_ATM")]
+        [Display(Name     = "钉钉考勤机")]
+        [EnumMember(Value = "DING_ATM")]
         DingATM = 2,
 
         /// <summary>
         ///     用户打卡
         /// </summary>
-        [Display(Name = "用户打卡")] [EnumMember(Value = "USER")]
+        [Display(Name     = "用户打卡")]
+        [EnumMember(Value = "USER")]
         User = 3,
 
         /// <summary>
         ///     老板改签
         /// </summary>
-        [Display(Name = "老板改签")] [EnumMember(Value = "BOSS")]
+        [Display(Name     = "老板改签")]
+        [EnumMember(Value = "BOSS")]
         Boos = 4,
 
         /// <summary>
         ///     审批系统
         /// </summary>
-        [Display(Name = "审批系统")] [EnumMember(Value = "APPROVE")]
+        [Display(Name     = "审批系统")]
+        [EnumMember(Value = "APPROVE")]
         Approve = 5,
 
         /// <summary>
         ///     考勤系统
         /// </summary>
-        [Display(Name = "考勤系统")] [EnumMember(Value = "SYSTEM")]
+        [Display(Name     = "考勤系统")]
+        [EnumMember(Value = "SYSTEM")]
         System = 6,
 
         /// <summary>
         ///     自动打卡
         /// </summary>
-        [Display(Name = "自动打卡")] [EnumMember(Value = "AUTO_CHECK")]
+        [Display(Name     = "自动打卡")]
+        [EnumMember(Value = "AUTO_CHECK")]
         AutoCheck = 7
     }
 }

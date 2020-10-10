@@ -21,8 +21,7 @@ namespace Magicodes.Dingtalk.SDK.Helper
 {
     public class TimeZoneHelper
     {
-        public static DateTime GetChinaDateTime(DateTime? time = null)
-        {
+        public static DateTime GetChinaDateTime(DateTime? time = null) {
             if (!time.HasValue)
                 time = DateTime.Now;
             return time.Value.ToUniversalTime().AddHours(8);

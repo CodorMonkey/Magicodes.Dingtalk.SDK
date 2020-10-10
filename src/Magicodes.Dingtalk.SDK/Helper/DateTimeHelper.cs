@@ -34,8 +34,7 @@ namespace Magicodes.Dingtalk.SDK.Helper
         /// </summary>
         /// <param name="time"></param>
         /// <returns></returns>
-        public static long ConvertToTimeStamp(this DateTime time)
-        {
+        public static long ConvertToTimeStamp(this DateTime time) {
             return (long) (time - startTime).TotalMilliseconds;
         }
 
@@ -44,8 +43,7 @@ namespace Magicodes.Dingtalk.SDK.Helper
         /// </summary>
         /// <param name="timestamp"></param>
         /// <returns></returns>
-        public static DateTime ConvertToDateTime(this long timestamp)
-        {
+        public static DateTime ConvertToDateTime(this long timestamp) {
             return startTime.AddMilliseconds(timestamp);
         }
     }

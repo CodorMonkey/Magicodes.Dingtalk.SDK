@@ -23,26 +23,22 @@ namespace Magicodes.Dingtalk.SDK
     {
         private readonly int _code;
 
-        public DingtalkApiException()
-        {
+        public DingtalkApiException() {
         }
 
-        public DingtalkApiException(string message) : base(message)
-        {
+        public DingtalkApiException(string message) : base(message) {
         }
 
-        public DingtalkApiException(int code, string message) : base(message)
-        {
+        public DingtalkApiException(int code, string message) : base(message) {
             _code = code;
         }
 
-        public DingtalkApiException(int code, string message, Exception innerException) : base(message, innerException)
-        {
+        public DingtalkApiException(int code, string message, Exception innerException) : base(
+            message, innerException) {
             _code = code;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             if (_code == 0) return base.ToString();
             return "ErrorCode:" + _code + Environment.NewLine + base.ToString();
         }

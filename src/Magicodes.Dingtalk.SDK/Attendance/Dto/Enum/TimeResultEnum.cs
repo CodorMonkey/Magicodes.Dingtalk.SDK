@@ -28,37 +28,43 @@ namespace Magicodes.Dingtalk.SDK.Attendance.Dto.Enum
         /// <summary>
         ///     正常
         /// </summary>
-        [Display(Name = "正常")] [EnumMember(Value = "Normal")]
+        [Display(Name     = "正常")]
+        [EnumMember(Value = "Normal")]
         Normal = 0,
 
         /// <summary>
         ///     早退
         /// </summary>
-        [Display(Name = "早退")] [EnumMember(Value = "Early")]
+        [Display(Name     = "早退")]
+        [EnumMember(Value = "Early")]
         Early = 1,
 
         /// <summary>
         ///     迟到
         /// </summary>
-        [Display(Name = "迟到")] [EnumMember(Value = "Late")]
+        [Display(Name     = "迟到")]
+        [EnumMember(Value = "Late")]
         Late = 2,
 
         /// <summary>
         ///     严重迟到
         /// </summary>
-        [Display(Name = "严重迟到")] [EnumMember(Value = "SeriousLate")]
+        [Display(Name     = "严重迟到")]
+        [EnumMember(Value = "SeriousLate")]
         SeriousLate = 3,
 
         /// <summary>
         ///     旷工迟到
         /// </summary>
-        [Display(Name = "旷工迟到")] [EnumMember(Value = "Absenteeism")]
+        [Display(Name     = "旷工迟到")]
+        [EnumMember(Value = "Absenteeism")]
         Absenteeism = 4,
 
         /// <summary>
         ///     未打卡
         /// </summary>
-        [Display(Name = "未打卡")] [EnumMember(Value = "NotSigned")]
+        [Display(Name     = "未打卡")]
+        [EnumMember(Value = "NotSigned")]
         NotSigned = 5
     }
 }

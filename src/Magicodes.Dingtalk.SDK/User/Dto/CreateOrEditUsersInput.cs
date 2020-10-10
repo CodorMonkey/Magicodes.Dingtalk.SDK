@@ -15,10 +15,10 @@
 //
 // ======================================================================
 
-using Newtonsoft.Json;
-using SimpleJson;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using SimpleJson;
 
 namespace Magicodes.Dingtalk.SDK.User.Dto
 {

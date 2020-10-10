@@ -24,7 +24,7 @@ namespace Magicodes.Dingtalk.SDK.SmartWork.Dto
     /// <summary>
     /// 
     /// </summary>
-    public class QueryOnJobResult: ApiResultBase
+    public class QueryOnJobResult : ApiResultBase
     {
         /// <summary>
         /// 分页结果

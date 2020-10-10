@@ -24,11 +24,9 @@ namespace Magicodes.Dingtalk.SDK.Staff
 {
     public class StaffApi : ApiBase
     {
-        public StaffApi(ILogger<StaffApi> logger, IServiceProvider serviceProvider) : base(logger, serviceProvider)
-        {
+        public StaffApi(ILogger<StaffApi> logger, IServiceProvider serviceProvider) : base(
+            logger, serviceProvider) {
         }
-
-        
 
 
         /// <summary>
@@ -37,10 +35,9 @@ namespace Magicodes.Dingtalk.SDK.Staff
         /// <param name="userId"></param>
         /// <param name="lang">暂只支持zh_CN</param>
         /// <returns></returns>
-        public async Task<StaffResult> Get(string userId, string lang = "zh_CN")
-        {
+        public async Task<StaffResult> Get(string userId, string lang = "zh_CN") {
             return await Get<StaffResult>(
-                $"user/get?access_token={{access_token}}&userid={userId}");
+                       $"user/get?access_token={{access_token}}&userid={userId}");
         }
     }
 }

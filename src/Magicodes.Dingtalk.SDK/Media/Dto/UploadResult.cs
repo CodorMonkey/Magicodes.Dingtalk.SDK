@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Magicodes.Dingtalk.SDK.Media.Dto
 {

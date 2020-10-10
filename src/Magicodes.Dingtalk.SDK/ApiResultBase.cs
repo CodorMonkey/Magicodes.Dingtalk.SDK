@@ -37,8 +37,7 @@ namespace Magicodes.Dingtalk.SDK
         ///     是否成功
         /// </summary>
         /// <returns></returns>
-        public bool IsSuccess()
-        {
+        public bool IsSuccess() {
             return ErrorCode == 0;
         }
     }

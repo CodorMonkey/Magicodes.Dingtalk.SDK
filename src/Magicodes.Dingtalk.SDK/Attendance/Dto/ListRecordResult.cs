@@ -25,6 +25,7 @@ namespace Magicodes.Dingtalk.SDK.Attendance.Dto
     /// </summary>
     public class ListRecordResult : ApiResultBase
     {
-        [JsonProperty("recordresult")] public List<RecordResult> RecordResult { get; set; }
+        [JsonProperty("recordresult")]
+        public List<RecordResult> RecordResult { get; set; }
     }
 }

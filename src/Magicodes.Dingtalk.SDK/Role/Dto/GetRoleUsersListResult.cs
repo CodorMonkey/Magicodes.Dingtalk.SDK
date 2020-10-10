@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Magicodes.Dingtalk.SDK.Role.Dto
 {
@@ -39,7 +37,7 @@ namespace Magicodes.Dingtalk.SDK.Role.Dto
         /// </summary>
         [JsonProperty("list")]
         public List<User> List { get; set; }
-}
+    }
 
     /// <summary>
     /// 员工

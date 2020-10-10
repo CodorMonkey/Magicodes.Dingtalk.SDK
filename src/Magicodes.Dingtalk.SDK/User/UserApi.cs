@@ -1,8 +1,9 @@
-﻿using Magicodes.Dingtalk.SDK.User.Dto;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Magicodes.Dingtalk.SDK.Helper;
+using Magicodes.Dingtalk.SDK.User.Dto;
+using Microsoft.Extensions.Logging;
 
 namespace Magicodes.Dingtalk.SDK.User
 {
@@ -17,8 +18,8 @@ namespace Magicodes.Dingtalk.SDK.User
         /// <param name=""></param>
         /// <param name="logger"></param>
         /// <param name="serviceProvider"></param>
-        public UserApi(ILogger<UserApi> logger, IServiceProvider serviceProvider) : base(logger, serviceProvider)
-        {
+        public UserApi(ILogger<UserApi> logger, IServiceProvider serviceProvider) : base(
+            logger, serviceProvider) {
         }
 
         /// <summary>
@@ -26,33 +27,33 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="input">创建员工</param>
         /// <returns></returns>
-        public async Task<CreateUserResult> Create(CreateOrEditUsersInput input)
-        {
-            if (input.HiredDateTime != null)
-            {
+        public async Task<CreateUserResult> Create(CreateOrEditUsersInput input) {
+            if (input.HiredDateTime != null) {
                 // 把入职时间转换为时间戳
-                input.HiredDate = Helper.DateTimeHelper.ConvertToTimeStamp(Convert.ToDateTime(input.HiredDateTime));
+                input.HiredDate =
+                    DateTimeHelper.ConvertToTimeStamp(
+                        Convert.ToDateTime(input.HiredDateTime));
             }
+
             return await Post<CreateUserResult>(
-               "user/create?access_token={ACCESS_TOKEN}", new
-               {
-                   userid = input.UserId,
-                   name = input.Name,
-                   orderInDepts = input.OrderInDepts,
-                   department = input.Department,
-                   position = input.Position,
-                   mobile = input.Mobile,
-                   tel = input.Tel,
-                   workPlace = input.WorkPlace,
-                   remark = input.Remark,
-                   email = input.Email,
-                   orgEmail = input.OrgEmail,
-                   jobnumber = input.Jobnumber,
-                   isHide = input.isHide,
-                   isSenior = input.isSenior,
-                   extattr = input.Extattr,
-                   hiredDate = input.HiredDate
-               });
+                       "user/create?access_token={ACCESS_TOKEN}", new {
+                           userid       = input.UserId,
+                           name         = input.Name,
+                           orderInDepts = input.OrderInDepts,
+                           department   = input.Department,
+                           position     = input.Position,
+                           mobile       = input.Mobile,
+                           tel          = input.Tel,
+                           workPlace    = input.WorkPlace,
+                           remark       = input.Remark,
+                           email        = input.Email,
+                           orgEmail     = input.OrgEmail,
+                           jobnumber    = input.Jobnumber,
+                           isHide       = input.isHide,
+                           isSenior     = input.isSenior,
+                           extattr      = input.Extattr,
+                           hiredDate    = input.HiredDate
+                       });
         }
 
         /// <summary>
@@ -60,32 +61,32 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="input">更新员工</param>
         /// <returns></returns>
-        public async Task<ApiResultBase> Update(CreateOrEditUsersInput input)
-        {
-            if (input.HiredDateTime != null)
-            {
+        public async Task<ApiResultBase> Update(CreateOrEditUsersInput input) {
+            if (input.HiredDateTime != null) {
                 // 把入职时间转换为时间戳
-                input.HiredDate = Helper.DateTimeHelper.ConvertToTimeStamp(Convert.ToDateTime(input.HiredDateTime));
+                input.HiredDate =
+                    DateTimeHelper.ConvertToTimeStamp(
+                        Convert.ToDateTime(input.HiredDateTime));
             }
+
             return await Post<ApiResultBase>(
-               "user/update?access_token={ACCESS_TOKEN}", new
-               {
-                   userid = input.UserId,
-                   name = input.Name,
-                   orderInDepts = input.OrderInDepts,
-                   department = input.Department,
-                   position = input.Position,
-                   tel = input.Tel,
-                   workPlace = input.WorkPlace,
-                   remark = input.Remark,
-                   email = input.Email,
-                   orgEmail = input.OrgEmail,
-                   jobnumber = input.Jobnumber,
-                   isHide = input.isHide,
-                   isSenior = input.isSenior,
-                   extattr = input.Extattr,
-                   hiredDate = input.HiredDate
-               });
+                       "user/update?access_token={ACCESS_TOKEN}", new {
+                           userid       = input.UserId,
+                           name         = input.Name,
+                           orderInDepts = input.OrderInDepts,
+                           department   = input.Department,
+                           position     = input.Position,
+                           tel          = input.Tel,
+                           workPlace    = input.WorkPlace,
+                           remark       = input.Remark,
+                           email        = input.Email,
+                           orgEmail     = input.OrgEmail,
+                           jobnumber    = input.Jobnumber,
+                           isHide       = input.isHide,
+                           isSenior     = input.isSenior,
+                           extattr      = input.Extattr,
+                           hiredDate    = input.HiredDate,
+                       });
         }
 
         /// <summary>
@@ -93,9 +94,9 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="userid">员工id</param>
         /// <returns></returns>
-        public async Task<ApiResultBase> Delete(string userid)
-        {
-            return await Get<ApiResultBase>("user/delete?access_token={ACCESS_TOKEN}&userid=" + userid);
+        public async Task<ApiResultBase> Delete(string userid) {
+            return await Get<ApiResultBase>("user/delete?access_token={ACCESS_TOKEN}&userid=" +
+                                            userid);
         }
 
         /// <summary>
@@ -104,14 +105,14 @@ namespace Magicodes.Dingtalk.SDK.User
         /// <param name="userId">员工id</param>
         /// <param name="lang">通讯录语言</param>
         /// <returns></returns>
-        public async Task<GetUserDetailsResult> GetUserDetails(string userId, string lang = "zh_CN")
-        {
-            var queryParameters = new Dictionary<string, string>
-            {
-                { "userid", userId },
-                { "lang", lang }
+        public async Task<GetUserDetailsResult>
+            GetUserDetails(string userId, string lang = "zh_CN") {
+            var queryParameters = new Dictionary<string, string> {
+                {"userid", userId},
+                {"lang", lang}
             };
-            return await Get<GetUserDetailsResult>("user/get?access_token={ACCESS_TOKEN}", queryParameters);
+            return await Get<GetUserDetailsResult>("user/get?access_token={ACCESS_TOKEN}",
+                                                   queryParameters);
         }
 
         /// <summary>
@@ -119,9 +120,9 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="deptId">部门id</param>
         /// <returns></returns>
-        public async Task<GetUserDetailsResult> GetDeptMemberUserIds(string deptId)
-        {
-            return await Get<GetUserDetailsResult>("user/getDeptMember?access_token={ACCESS_TOKEN}&deptId=" + deptId);
+        public async Task<GetUserDetailsResult> GetDeptMemberUserIds(string deptId) {
+            return await Get<GetUserDetailsResult>(
+                       "user/getDeptMember?access_token={ACCESS_TOKEN}&deptId=" + deptId);
         }
 
         /// <summary>
@@ -129,20 +130,20 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="input">获取部门用户</param>
         /// <returns></returns>
-        public async Task<GetDeptMemberUsersResult> GetDeptMemberUsers(GetDeptMemberUsersInput input)
-        {
-            var queryParameters = new Dictionary<string, string>
-            {
+        public async Task<GetDeptMemberUsersResult> GetDeptMemberUsers(
+            GetDeptMemberUsersInput input) {
+            var queryParameters = new Dictionary<string, string> {
                 {"department_id", input.DepartmentId.ToString()},
-                { "lang", input.Language },
-                { "order", input.Order }
+                {"lang", input.Language},
+                {"order", input.Order}
             };
-            if (input.Offset.HasValue && input.Size.HasValue)
-            {
+            if (input.Offset.HasValue && input.Size.HasValue) {
                 queryParameters.Add("offset", input.Offset?.ToString());
                 queryParameters.Add("size", input.Size?.ToString());
             }
-            return await Get<GetDeptMemberUsersResult>("user/simplelist?access_token={ACCESS_TOKEN}", queryParameters);
+
+            return await Get<GetDeptMemberUsersResult>(
+                       "user/simplelist?access_token={ACCESS_TOKEN}", queryParameters);
         }
 
         /// <summary>
@@ -150,25 +151,24 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="input">获取部门用户详情</param>
         /// <returns></returns>
-        public async Task<GetDeptMemberUserDetailsResult> GetDeptMemberUserDetails(GetDeptMemberUserDetailsInput input)
-        {
-            var queryParameters = new Dictionary<string, string>
-            {
-                { "department_id", input.DepartmentId.ToString() },
-                { "lang", input.Language },
-                { "offset", input.Offset.ToString() },
-                { "size", input.Size.ToString() },
-                { "order", input.Order }
+        public async Task<GetDeptMemberUserDetailsResult> GetDeptMemberUserDetails(
+            GetDeptMemberUserDetailsInput input) {
+            var queryParameters = new Dictionary<string, string> {
+                {"department_id", input.DepartmentId.ToString()},
+                {"lang", input.Language},
+                {"offset", input.Offset.ToString()},
+                {"size", input.Size.ToString()},
+                {"order", input.Order}
             };
-            return await Get<GetDeptMemberUserDetailsResult>("user/listbypage", queryParameters);
+            return await Get<GetDeptMemberUserDetailsResult>(
+                       "user/listbypage?access_token={ACCESS_TOKEN}", queryParameters);
         }
 
         /// <summary>
         /// 获取管理员列表
         /// </summary>
         /// <returns></returns>
-        public async Task<GetAdminsListResult> GetAdminsList()
-        {
+        public async Task<GetAdminsListResult> GetAdminsList() {
             return await Get<GetAdminsListResult>("user/get_admin?access_token={ACCESS_TOKEN}");
         }
 
@@ -177,9 +177,9 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="userId">员工id</param>
         /// <returns></returns>
-        public async Task<GetAdminScopeResult> GetAdminScope(string userId)
-        {
-            return await Get<GetAdminScopeResult>("topapi/user/get_admin_scope?access_token={ACCESS_TOKEN}&userid=" + userId);
+        public async Task<GetAdminScopeResult> GetAdminScope(string userId) {
+            return await Get<GetAdminScopeResult>(
+                       "topapi/user/get_admin_scope?access_token={ACCESS_TOKEN}&userid=" + userId);
         }
 
         /// <summary>
@@ -187,9 +187,9 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="unionId">员工在当前开发者企业账号范围内的唯一标识，系统生成，固定值，不会改变</param>
         /// <returns></returns>
-        public async Task<GetUserIdByUnionidResult> GetUserIdByUnionid(string unionId)
-        {
-            return await Get<GetUserIdByUnionidResult>("getUseridByUnionid?access_token={ACCESS_TOKEN}&unionid=xxx" + unionId);
+        public async Task<GetUserIdByUnionidResult> GetUserIdByUnionid(string unionId) {
+            return await Get<GetUserIdByUnionidResult>(
+                       "getUseridByUnionid?access_token={ACCESS_TOKEN}&unionid=" + unionId);
         }
 
         /// <summary>
@@ -197,9 +197,9 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="mobile">手机号码</param>
         /// <returns></returns>
-        public async Task<GetUserIdByMobileResult> GetUserIdByMobile(string mobile)
-        {
-            return await Get<GetUserIdByMobileResult>("user/get_by_mobile?access_token={ACCESS_TOKEN}&mobile=" + mobile);
+        public async Task<GetUserIdByMobileResult> GetUserIdByMobile(string mobile) {
+            return await Get<GetUserIdByMobileResult>(
+                       "user/get_by_mobile?access_token={ACCESS_TOKEN}&mobile=" + mobile);
         }
 
         /// <summary>
@@ -207,9 +207,10 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="onlyActive">0：包含未激活钉钉的人员数量,1：不包含未激活钉钉的人员数量</param>
         /// <returns></returns>
-        public async Task<GetOrgUserCountResult> GetOrgUserCount(int onlyActive)
-        {
-            return await Get<GetOrgUserCountResult>("user/get_org_user_count?access_token={ACCESS_TOKEN}&onlyActive=" + onlyActive);
+        public async Task<GetOrgUserCountResult> GetOrgUserCount(int onlyActive) {
+            return await Get<GetOrgUserCountResult>(
+                       "user/get_org_user_count?access_token={ACCESS_TOKEN}&onlyActive=" +
+                       onlyActive);
         }
 
         /// <summary>
@@ -217,14 +218,14 @@ namespace Magicodes.Dingtalk.SDK.User
         /// </summary>
         /// <param name="input">未登录钉钉的员工列表</param>
         /// <returns></returns>
-        public async Task<GetInactiveUsersListResult> GetInactiveUsersList(GetInactiveUsersListInput input)
-        {
-            return await Post<GetInactiveUsersListResult>("topapi/inactive/user/get?access_token={ACCESS_TOKEN}", new
-            {
-                query_date = input.QueryDate,
-                offset = input.Offset,
-                size = input.Size
-            });
+        public async Task<GetInactiveUsersListResult> GetInactiveUsersList(
+            GetInactiveUsersListInput input) {
+            return await Post<GetInactiveUsersListResult>(
+                       "topapi/inactive/user/get?access_token={ACCESS_TOKEN}", new {
+                           query_date = input.QueryDate,
+                           offset     = input.Offset,
+                           size       = input.Size
+                       });
         }
     }
 }

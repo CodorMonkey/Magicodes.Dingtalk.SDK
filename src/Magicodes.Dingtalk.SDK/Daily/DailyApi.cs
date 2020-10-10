@@ -25,8 +25,8 @@ namespace Magicodes.Dingtalk.SDK.Daily
 {
     public class DailyApi : ApiBase
     {
-        public DailyApi(ILogger<DailyApi> logger, IServiceProvider serviceProvider) : base(logger, serviceProvider)
-        {
+        public DailyApi(ILogger<DailyApi> logger, IServiceProvider serviceProvider) : base(
+            logger, serviceProvider) {
         }
 
 
@@ -34,25 +34,27 @@ namespace Magicodes.Dingtalk.SDK.Daily
         ///     获取用户日志数据(日报)
         /// </summary>
         /// <returns></returns>
-        public async Task<DailyApiResult> DailyList(DateTime? startTime = null, DateTime? endTime = null,
-            string templateName = "日报", string userId = null, int cursor = 0, int size = 10)
-        {
+        public async Task<DailyApiResult> DailyList(DateTime? startTime    = null,
+                                                    DateTime? endTime      = null,
+                                                    string    templateName = "日报",
+                                                    string    userId       = null, int cursor = 0,
+                                                    int       size         = 10) {
             if (!startTime.HasValue)
                 startTime = Convert.ToDateTime(TimeZoneHelper.GetChinaDateTime().AddDays(-1)
-                    .ToString("yyyy-MM-dd 13:00:00"));
+                                                             .ToString("yyyy-MM-dd 13:00:00"));
             if (!endTime.HasValue)
-                endTime = Convert.ToDateTime(TimeZoneHelper.GetChinaDateTime().ToString("yyyy-MM-dd 10:00:00"));
+                endTime = Convert.ToDateTime(TimeZoneHelper.GetChinaDateTime()
+                                                           .ToString("yyyy-MM-dd 10:00:00"));
 
             return await Post<DailyApiResult>(
-                "topapi/report/list?access_token={access_token}", new
-                {
-                    start_time = startTime.Value.ConvertToTimeStamp(),
-                    end_time = endTime.Value.ConvertToTimeStamp(),
-                    template_name = templateName,
-                    userid = userId,
-                    cursor,
-                    size
-                });
+                       "topapi/report/list?access_token={access_token}", new {
+                           start_time    = startTime.Value.ConvertToTimeStamp(),
+                           end_time      = endTime.Value.ConvertToTimeStamp(),
+                           template_name = templateName,
+                           userid        = userId,
+                           cursor,
+                           size
+                       });
         }
     }
 }

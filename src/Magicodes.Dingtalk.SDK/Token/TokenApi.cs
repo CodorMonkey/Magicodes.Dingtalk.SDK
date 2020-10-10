@@ -27,18 +27,17 @@ namespace Magicodes.Dingtalk.SDK.Token
     {
         private readonly IConfiguration _configuration;
 
-        public TokenApi(ILogger<TokenApi> logger, IConfiguration configuration, IServiceProvider serviceProvider) :
-            base(logger, serviceProvider)
-        {
+        public TokenApi(ILogger<TokenApi> logger, IConfiguration configuration,
+                        IServiceProvider  serviceProvider) :
+            base(logger, serviceProvider) {
             _configuration = configuration;
         }
 
-        public async Task<GetTokenResult> GetToken()
-        {
-            var appKey = _configuration["Dingtalk:AppKey"];
+        public async Task<GetTokenResult> GetToken() {
+            var appKey    = _configuration["Dingtalk:AppKey"];
             var appSecret = _configuration["Dingtalk:AppSecret"];
             return await Get<GetTokenResult>(
-                $"gettoken?appkey={appKey}&appsecret={appSecret}");
+                       $"gettoken?appkey={appKey}&appsecret={appSecret}");
         }
     }
 }

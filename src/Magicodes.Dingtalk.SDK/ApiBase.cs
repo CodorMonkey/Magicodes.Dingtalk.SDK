@@ -15,80 +15,75 @@
 //   
 // ======================================================================
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Magicodes.Dingtalk.SDK.Token;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Magicodes.Dingtalk.SDK
 {
     public abstract class ApiBase
     {
-        private const string AccessTokenString = "{ACCESS_TOKEN}";
-        private const string BaseApiUrl = "https://oapi.dingtalk.com/";
-        protected readonly ILogger<ApiBase> _logger;
+        private const    string           AccessTokenString = "{ACCESS_TOKEN}";
+        private const    string           BaseApiUrl        = "https://oapi.dingtalk.com/";
+        private readonly ILogger<ApiBase> _logger;
         private readonly IServiceProvider _serviceProvider;
+        private readonly RestClient       _client = new RestClient(BaseApiUrl);
 
-        protected ApiBase(ILogger<ApiBase> logger, IServiceProvider serviceProvider)
-        {
-            _logger = logger;
+        protected ApiBase(ILogger<ApiBase> logger, IServiceProvider serviceProvider) {
+            _logger          = logger;
             _serviceProvider = serviceProvider;
         }
 
-        protected virtual async Task<T> Get<T>(string resourceUrl, Dictionary<string, string> queryParameters = null) where T : ApiResultBase, new()
-        {
+        protected virtual async Task<T> Get<T>(string                     resourceUrl,
+                                               Dictionary<string, string> queryParameters = null)
+            where T : ApiResultBase, new() {
             _logger.LogDebug($"GET {BaseApiUrl}{resourceUrl}");
             resourceUrl = await SetAccessToken(resourceUrl);
-            var client = new RestClient(BaseApiUrl);
             var request = new RestRequest(resourceUrl, Method.GET);
             request.AddHeader("cache-control", "no-cache");
-            if (queryParameters != null && queryParameters.Count > 0)
-            {
-                foreach (var par in queryParameters)
-                {
+            if (queryParameters != null && queryParameters.Count > 0) {
+                foreach (var par in queryParameters) {
                     request.AddQueryParameter(par.Key, par.Value, true);
                 }
             }
-            return await ReturnDataAsync<T>(client, request);
+
+            return await ReturnDataAsync<T>(_client, request);
         }
 
-        protected virtual async Task<T> Post<T>(string resourceUrl, object data = null) where T : ApiResultBase, new()
-        {
+        protected virtual async Task<T> Post<T>(string resourceUrl, object data = null)
+            where T : ApiResultBase, new() {
             _logger.LogDebug(
                 $"POST {BaseApiUrl}{resourceUrl}{(data != null ? Environment.NewLine + JsonConvert.SerializeObject(data) : string.Empty)}");
 
             resourceUrl = await SetAccessToken(resourceUrl);
-            var client = new RestClient(BaseApiUrl);
             var request = new RestRequest(resourceUrl, Method.POST);
             request.AddHeader("cache-control", "no-cache");
-            if (data != null)
-            {
+            if (data != null) {
                 request.AddJsonBody(data);
             }
 
-            return await ReturnDataAsync<T>(client, request);
+            return await ReturnDataAsync<T>(_client, request);
         }
 
-        private async Task<string> SetAccessToken(string url)
-        {
-            if (url.IndexOf(AccessTokenString, StringComparison.CurrentCultureIgnoreCase) == -1)
-            {
+        private async Task<string> SetAccessToken(string url) {
+            if (url.IndexOf(AccessTokenString, StringComparison.CurrentCultureIgnoreCase) == -1) {
                 return url;
             }
 
             var tokenManager = _serviceProvider.GetService<TokenManager>();
-            var token = await tokenManager.GetToken();
+            var token        = await tokenManager.GetToken();
             url = url.Replace(AccessTokenString, token, StringComparison.CurrentCultureIgnoreCase);
             _logger.LogDebug("Url Token 更新成功...");
             return url;
         }
 
-        private async Task<T> ReturnDataAsync<T>(RestClient client, RestRequest request) where T : ApiResultBase, new()
-        {
+        private async Task<T> ReturnDataAsync<T>(RestClient client, RestRequest request)
+            where T : ApiResultBase, new() {
             var response = await client.ExecuteTaskAsync(request);
             _logger.LogDebug($"{response.StatusCode} {response.Content}");
             var data = JsonConvert.DeserializeObject<T>(response.Content);
