@@ -16,9 +16,11 @@
 // ======================================================================
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using NeoSmart.AsyncLock;
 
 namespace Magicodes.Dingtalk.SDK.Token
 {
@@ -28,25 +30,34 @@ namespace Magicodes.Dingtalk.SDK.Token
         private readonly IDistributedCache     _cache;
         private readonly ILogger<TokenManager> _logger;
         private readonly TokenApi              _tokenApi;
+        private static   AsyncLock _lock = new AsyncLock();
 
-        public TokenManager(IDistributedCache     cache, TokenApi tokenApi,
-                            ILogger<TokenManager> logger) {
+        public TokenManager(
+            IDistributedCache     cache, TokenApi tokenApi,
+            ILogger<TokenManager> logger) {
             _cache    = cache;
             _tokenApi = tokenApi;
             _logger   = logger;
         }
 
+        /// <summary>
+        /// 获取token
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> GetToken() {
-            var value = await _cache.GetStringAsync(Key);
-            if (!string.IsNullOrEmpty(value)) return value;
-            var result = await _tokenApi.GetToken();
-            value = result.AccessToken;
-            _logger.LogDebug("Token获取成功...");
-            await _cache.SetStringAsync(Key, value,
-                                        new DistributedCacheEntryOptions().SetSlidingExpiration(
-                                            TimeSpan.FromSeconds(7000)));
-            _logger.LogDebug("Token已写入缓存...");
-            return value;
+            using (await _lock.LockAsync()) {
+                var value = await _cache.GetStringAsync(Key);
+                if (!string.IsNullOrEmpty(value)) return value;
+                var result = await _tokenApi.GetToken();
+                value = result.AccessToken;
+                _logger.LogDebug("Token获取成功...");
+                var distributedCacheEntryOptions =
+                    new DistributedCacheEntryOptions().SetSlidingExpiration(
+                        TimeSpan.FromSeconds(7000));
+                await _cache.SetStringAsync(Key, value, distributedCacheEntryOptions);
+                _logger.LogDebug("Token已写入缓存...");
+                return value;
+            }
         }
     }
 }

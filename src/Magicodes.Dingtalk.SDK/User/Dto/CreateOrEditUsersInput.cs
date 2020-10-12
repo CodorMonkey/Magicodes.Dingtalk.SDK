@@ -18,7 +18,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
-using SimpleJson;
+using RestSharp;
 
 namespace Magicodes.Dingtalk.SDK.User.Dto
 {
